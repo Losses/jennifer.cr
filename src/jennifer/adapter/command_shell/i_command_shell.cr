@@ -3,8 +3,8 @@ require "./command"
 module Jennifer
   module Adapter
     abstract class ICommandShell
-      OPTIONS_PLACEHOLDER = {% flag?(:win32) ? "" : %("${@}") %}
-      SUDO                = {% flag?(:win32) ? "" : "sudo" %}
+      OPTIONS_PLACEHOLDER = {% if flag?(:win32) %} "" {% else %} %("${@}") {% end %}
+      SUDO                = {% if flag?(:win32) %} "" {% else %} "sudo" {% end %}
       abstract def execute(command) : NamedTuple
 
       getter config : Config
